@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=64", "torch", "numpy"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cuda_mel"
+version = "0.1.0"
+description = "Fused STFT + mel filterbank CUDA kernel, ~3x faster than torchaudio's GPU path"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Nikhil Vincent" }]
+dependencies = ["torch", "numpy"]
+
+[project.optional-dependencies]
+test = ["torchaudio"]
+bench = ["torchaudio", "librosa", "matplotlib"]

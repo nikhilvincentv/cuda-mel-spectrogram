@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "gpu": "NVIDIA GB10",
+    "torch": "2.12.1+cu130",
+    "torchaudio": "2.11.0+cu130",
+    "platform": "Linux-6.17.0-1021-nvidia-aarch64-with-glibc2.39",
+    "sr": 16000,
+    "n_fft": 512,
+    "hop": 160,
+    "n_mels": 64
+  },
+  "results": [
+    {
+      "impl": "cuda_mel_fused",
+      "duration_s": 0.5,
+      "mean_ms": 0.020003199968487026,
+      "std_ms": 0.0012943159323478897,
+      "iters": 100
+    },
+    {
+      "impl": "cuda_mel_naive",
+      "duration_s": 0.5,
+      "mean_ms": 0.028899519965052606,
+      "std_ms": 0.0007786717583556599,
+      "iters": 100
+    },
+    {
+      "impl": "torchaudio_gpu",
+      "duration_s": 0.5,
+      "mean_ms": 0.06207871977239847,
+      "std_ms": 0.0021651391289100137,
+      "iters": 100
+    },
+    {
+      "impl": "librosa_cpu",
+      "duration_s": 0.5,
+      "mean_ms": 0.33578455331735313,
+      "std_ms": 0.011205751279395031,
+      "iters": 20
+    },
+    {
+      "impl": "cuda_mel_fused",
+      "duration_s": 1.0,
+      "mean_ms": 0.020388799905776977,
+      "std_ms": 0.0013149600306487984,
+      "iters": 100
+    },
+    {
+      "impl": "cuda_mel_naive",
+      "duration_s": 1.0,
+      "mean_ms": 0.029139199964702128,
+      "std_ms": 0.0007057901970081778,
+      "iters": 100
+    },
+    {
+      "impl": "torchaudio_gpu",
+      "duration_s": 1.0,
+      "mean_ms": 0.06168736033141613,
+      "std_ms": 0.0016320278366828147,
+      "iters": 100
+    },
+    {
+      "impl": "librosa_cpu",
+      "duration_s": 1.0,
+      "mean_ms": 0.4013198020402342,
+      "std_ms": 0.006651328535101598,
+      "iters": 20
+    },
+    {
+      "impl": "cuda_mel_fused",
+      "duration_s": 3.5,
+      "mean_ms": 0.021229120045900343,
+      "std_ms": 0.0010379962519370125,
+      "iters": 100
+    },
+    {
+      "impl": "cuda_mel_naive",
+      "duration_s": 3.5,
+      "mean_ms": 0.02995872002094984,
+      "std_ms": 0.0013353782609823656,
+      "iters": 100
+    },
+    {
+      "impl": "torchaudio_gpu",
+      "duration_s": 3.5,
+      "mean_ms": 0.06082655999809503,
+      "std_ms": 0.0013912913478748754,
+      "iters": 100
+    },
+    {
+      "impl": "librosa_cpu",
+      "duration_s": 3.5,
+      "mean_ms": 0.7812692478182726,
+      "std_ms": 0.008390087656218258,
+      "iters": 20
+    },
+    {
+      "impl": "cuda_mel_fused",
+      "duration_s": 10.0,
+      "mean_ms": 0.027121280040591954,
+      "std_ms": 0.0003032181448259774,
+      "iters": 100
+    },
+    {
+      "impl": "cuda_mel_naive",
+      "duration_s": 10.0,
+      "mean_ms": 0.04176927991211414,
+      "std_ms": 0.0013811904583338802,
+      "iters": 100
+    },
+    {
+      "impl": "torchaudio_gpu",
+      "duration_s": 10.0,
+      "mean_ms": 0.0839638389647007,
+      "std_ms": 0.020608113426746382,
+      "iters": 100
+    },
+    {
+      "impl": "librosa_cpu",
+      "duration_s": 10.0,
+      "mean_ms": 1.7344866995699704,
+      "std_ms": 0.013126615517606788,
+      "iters": 20
+    }
+  ]
+}
