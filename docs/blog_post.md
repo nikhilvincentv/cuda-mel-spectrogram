@@ -159,7 +159,8 @@ across five different STFT configurations.
 
 The whole thing is a pip-installable PyTorch extension —
 `MelSpectrogramCUDA(...)` is a drop-in module. Code, benchmarks, and a 2-page
-technical note are on GitHub: **[LINK: your GitHub repo URL]**.
+technical note are on GitHub:
+**[github.com/nikhilvincentv/cuda-mel-spectrogram](https://github.com/nikhilvincentv/cuda-mel-spectrogram)**.
 
 ---
 
