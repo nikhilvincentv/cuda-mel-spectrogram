@@ -13,7 +13,7 @@ spotting, cough detection, ASR front ends). torchaudio computes them on GPU as
 a chain of **10 separate kernel launches** (pad → frame → window → FFT →
 magnitude → mel matmul → log …), each writing intermediates to global memory.
 For the short clips typical of edge-audio workloads (0.5–10 s), the pipeline is
-launch-latency-bound, not compute-bound — Nsight Compute shows **~5% SM and
+launch-latency-bound rather than compute-bound. Nsight Compute shows **~5% SM and
 DRAM utilization**.
 
 This project collapses the post-FFT stages (magnitude → mel projection → log)
@@ -40,10 +40,10 @@ waveform ──► reflection pad (ATen)
 
 The fused kernel launches one thread block per STFT frame:
 
-1. **Phase 1** — threads cooperatively compute `|FFT|²` for the frame's
+1. **Phase 1.** Threads cooperatively compute `|FFT|²` for the frame's
    `n_fft/2+1` bins directly into shared memory (coalesced reads, no global
    write).
-2. **Phase 2** — after a barrier, each thread owns one or more mel filters and
+2. **Phase 2.** After a barrier, each thread owns one or more mel filters and
    computes a sparse dot product over just that filter's nonzero bin range
    (CSR-style `weights/offsets/start_bin` arrays, read via `__ldg`), then
    applies `log(x+ε)` and writes the single output value.
@@ -104,7 +104,7 @@ front-end settings).
 
 Nsight Compute, fused kernel on a 3.5 s clip: 12.4 µs duration, 351 blocks ×
 256 threads, 35 registers/thread, 60% achieved occupancy, ~5% SM / memory
-throughput — the workload is launch-bound, which is precisely why reducing 10
+throughput. The workload is launch-bound, which is precisely why reducing 10
 launches to 4 (and skipping two intermediate DRAM round trips) dominates.
 
 ## Layout
@@ -123,3 +123,11 @@ docs/figures/         generated figures
 
 A 2-page write-up with implementation details and profiling analysis:
 [docs/note/note.pdf](docs/note/note.pdf).
+
+## Write-up and context
+
+I wrote this for my cough classification project, [CoughSense](https://github.com/nikhilvincentv/Cough-Mobile-App). Every audio model I train starts with a log-mel spectrogram, and profiling showed that step was mostly the GPU waiting on kernel launches.
+
+Blog post: [I Wrote a CUDA Kernel Because torchaudio Was Launching 10 of Them](https://nikhilvincent.dev/blog/cuda-mel-spectrogram-kernel)
+
+Built by Nikhil Vincent. More of my work is at https://nikhilvincent.dev.
